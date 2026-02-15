@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
-    <script type="module" src="/index.js"></script>
+    <script type="module" src="/data.js"></script>
 
     <header>
         <h1>Troop 1861 Trip Ideas</h1>
@@ -20,25 +20,26 @@
     <div id="filter">
         <p>filter here</p>
     </div>
-    <div id="cards">
-        <div class="card">
-            <div class="card-overview">
-                <h2>Trip Location</h2>
-                <p>--distance--cost--tags--here--</p>
-            </div>
-            <div class="card-details">
-                <p>notes, full list of tags, area, season, all go here</p>
-            </div>
-        </div>
-        <div class="card">
-            <p>card</p>
-        </div>
-        <div class="card">
-            <p>card</p>
-        </div>
-        <div class="card">
-            <p>card</p>
-        </div>
+    <div id="cards-container">
+      eee
     </div>
+
+<!-- Import modules using ES6 modules -->
+  <script type="module">
+    import { fetchGoogleSheetData } from './data.js';
+    import { initCards, showMatchingCards } from './index.js';
+
+    async function initApp() {
+      console.log('Initializing app...');
+      const data = await fetchGoogleSheetData();
+      initCards(data);
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+
+    // Make showMatchingCards globally accessible for search/filter events
+    window.showMatchingCards = showMatchingCards;
+  </script>
+
 </body>
 </html>
